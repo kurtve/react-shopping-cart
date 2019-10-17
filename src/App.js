@@ -19,10 +19,10 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	const removeItem = item => {
-		// removde the given item from the cart
-		// TODO: this function needs fixin' !!
-		const newCart = cart.filter(cartItem => cartItem !== item);
+	const removeItem = index => {
+		// removde the item at the given index from the cart
+		// note that a given product may appear multiple times in the cart
+		const newCart = cart.slice(0, index).concat(cart.slice(index + 1));
 		setCart(newCart);
 	};
 
@@ -35,10 +35,8 @@ function App() {
 					{/* Routes */}
 					<Route exact path="/" component={Products} />
 
-					<Route
-						path="/cart"
-						render={() => <ShoppingCart cart={cart} />}
-					/>
+					<Route path="/cart" component={ShoppingCart} />
+
 				</div>
 			</CartContext.Provider>
 		</ProductContext.Provider>
